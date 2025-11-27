@@ -423,6 +423,126 @@
       color: #ffffff; font-size: 1.6rem; text-decoration: none;
     }
     @media (max-width: 720px) { .whatsapp-float { display: block; } }
+    /* ========================= */
+/* MOBILE LAYOUT TWEAKS     */
+/* ========================= */
+
+/* Tablets + phones */
+@media (max-width: 768px) {
+  .page {
+    padding: 16px 16px 60px;
+  }
+
+  /* Hero stack + centre */
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 24px 0 36px;
+    gap: 20px;
+  }
+
+  .hero-text {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-meta {
+    justify-content: center;
+  }
+
+  /* Section headers align left so text doesn’t feel cramped */
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .section-subtitle {
+    text-align: left;
+    max-width: 100%;
+  }
+
+  /* Two-column sections (studio, visit etc.) become single column */
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 600px) {
+  /* Nav more compact */
+  .nav-inner {
+    padding-inline: 14px;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+  }
+
+  .nav-cta {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    letter-spacing: 0.09em;
+  }
+
+  /* Hide CTA text – keep icon so it doesn’t overflow */
+  .nav-cta span:last-child {
+    display: none;
+  }
+
+  /* Feature tiles, services, gallery strip stack nicely */
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-services {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-strip {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .gallery-images {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .visit-badges {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Buttons full-width for easier tapping */
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* WhatsApp bubble only on mobile */
+@media (max-width: 720px) {
+  .whatsapp-float {
+    display: block;
+  }
+}
   </style>
 </head>
 <body>
