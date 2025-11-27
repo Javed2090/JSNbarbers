@@ -41,6 +41,8 @@
     a { color: inherit; text-decoration: none; }
     main { min-height: 100vh; }
     .page { max-width: var(--max-width); margin: 0 auto; padding: 20px 20px 80px; }
+
+    /* NAV */
     .nav {
       position: sticky; top: 0; z-index: 20;
       backdrop-filter: blur(18px);
@@ -67,6 +69,8 @@
       background: radial-gradient(circle at 20% 0, #26241a, #050608 60%);
       box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8);
     }
+
+    /* Desktop nav links */
     .nav-links { display: flex; align-items: center; gap: 16px; font-size: 0.86rem; }
     .nav-links a {
       color: var(--muted); padding: 6px 0; border-bottom: 1px solid transparent;
@@ -78,6 +82,7 @@
     .nav-links a.active {
       color: var(--fg); border-color: rgba(212, 175, 55, 0.5); opacity: 1;
     }
+
     .nav-cta {
       padding: 8px 16px; border-radius: 999px;
       border: 1px solid rgba(212, 175, 55, 0.65);
@@ -99,10 +104,58 @@
       border-color: rgba(212, 175, 55, 0.9);
       background: radial-gradient(circle at 0 0, #3a310b, transparent 60%), #050608;
     }
-    @media (max-width: 720px) {
-      .nav-inner { padding-inline: 16px; }
-      .nav-links { display: none; }
+
+    /* Hamburger button (mobile) */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
     }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: #f7f7f7;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(3.5px) rotate(45deg);
+    }
+    .nav-toggle.open span:nth-child(2) {
+      transform: translateY(-3.5px) rotate(-45deg);
+    }
+
+    /* Mobile dropdown nav */
+    .nav-mobile-menu {
+      display: none;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(5, 6, 8, 0.98);
+    }
+    .nav-mobile-menu a {
+      display: block;
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: center;
+      text-decoration: none;
+      transition: background 160ms ease, color 160ms ease;
+    }
+    .nav-mobile-menu a:hover,
+    .nav-mobile-menu a.active {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--fg);
+    }
+
     section { margin-top: 36px; }
     .section-header {
       display: flex; justify-content: space-between; align-items: baseline;
@@ -127,6 +180,7 @@
       font-size: 0.76rem; color: var(--muted);
       display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
     }
+
     .hero {
       display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
       gap: 32px; padding: 40px 0 56px; align-items: center;
@@ -145,6 +199,7 @@
     .hero-title span.accent { color: var(--accent); font-weight: 700; }
     .hero-subtitle { font-size: 0.98rem; color: var(--muted); max-width: 460px; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
     .btn-primary {
       padding: 12px 22px; border-radius: 999px;
       border: 1px solid rgba(212, 175, 55, 0.65);
@@ -174,9 +229,11 @@
       border-color: rgba(255, 255, 255, 0.15);
       color: var(--fg); background: rgba(18, 18, 24, 0.96); transform: translateY(-1px);
     }
+
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; padding-top: 28px; }
     }
+
     .whatsapp-float {
       position: fixed; right: 18px; bottom: 18px; z-index: 40; display: none;
     }
@@ -188,7 +245,7 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #ffffff; font-size: 1.6rem; text-decoration: none;
     }
-    @media (max-width: 720px) { .whatsapp-float { display: block; } }
+
     .pill {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 4px 10px; border-radius: 999px;
@@ -197,8 +254,8 @@
       background: rgba(9, 9, 12, 0.9);
     }
     .pill-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+
     .two-col { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 26px; }
-    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
     .card-soft {
       border-radius: var(--radius-xl);
       border: 1px solid var(--border-subtle);
@@ -207,9 +264,92 @@
       box-shadow: var(--shadow-soft);
     }
     .muted { color: var(--muted); }
+
+    /* ========================= */
+    /* MOBILE LAYOUT TWEAKS      */
+    /* ========================= */
+
+    /* Tablets + phones */
+    @media (max-width: 768px) {
+      .page {
+        padding: 16px 16px 60px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .section-subtitle {
+        text-align: left;
+        max-width: 100%;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+
+    /* Smaller phones */
+    @media (max-width: 600px) {
+      .nav-inner {
+        padding-inline: 14px;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 0.8rem;
+        letter-spacing: 0.14em;
+      }
+
+      .nav-cta {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        letter-spacing: 0.09em;
+      }
+
+      .nav-cta span:last-child {
+        display: none; /* hide text, keep icon only */
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Mobile nav + WhatsApp bubble */
+    @media (max-width: 720px) {
+      .whatsapp-float {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-mobile-menu.open {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Mobile floating WhatsApp -->
   <div class="whatsapp-float">
     <a href="https://wa.me/447501919907?text=Hi%20JSN%20Barbers%2C%20I%27d%20like%20to%20book%20a%20cut."
        aria-label="Chat with JSN Barbers on WhatsApp"
@@ -219,18 +359,28 @@
     </a>
   </div>
 
+  <!-- NAVBAR -->
   <header class="nav">
     <div class="nav-inner">
       <a href="index.html" class="logo">
         <div class="logo-mark">J</div>
         <div>JSN BARBERS</div>
       </a>
+
+      <!-- Mobile hamburger button -->
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Desktop links -->
       <nav class="nav-links">
-        <a href="about.html" class="">About</a>
-        <a href="services.html" class="">Services</a>
-        <a href="gallery.html" class="">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
         <a href="visit.html" class="active">Visit</a>
       </nav>
+
       <a
         class="nav-cta"
         href="https://wa.me/447501919907?text=Hi%20JSN%20Barbers%2C%20I%27d%20like%20to%20book%20an%20appointment."
@@ -241,108 +391,117 @@
         <span>Book via WhatsApp</span>
       </a>
     </div>
+
+    <!-- Mobile dropdown menu -->
+    <nav class="nav-mobile-menu">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="visit.html" class="active">Visit</a>
+    </nav>
   </header>
 
   <main>
     <div class="page">
-<section class="fade-in">
-  <div class="section-header">
-    <h1 class="section-title">Visit & Booking</h1>
-    <p class="section-subtitle">
-      Central Birmingham location with WhatsApp-first bookings. Easy to
-      reach from tram, bus and city centre parking.
-    </p>
-  </div>
-</section>
+      <section class="fade-in">
+        <div class="section-header">
+          <h1 class="section-title">Visit & Booking</h1>
+          <p class="section-subtitle">
+            Central Birmingham location with WhatsApp-first bookings. Easy to
+            reach from tram, bus and city centre parking.
+          </p>
+        </div>
+      </section>
 
-<section class="fade-in two-col">
-  <div class="card-soft">
-    <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
-      Booking process
-    </h3>
-    <ol class="muted" style="font-size:0.86rem;line-height:1.8;padding-left:18px;">
-      <li>Send a WhatsApp message with your name.</li>
-      <li>Include preferred day, time and the service you’d like.</li>
-      <li>Optionally attach a photo of your current hair/beard.</li>
-      <li>Wait for confirmation and any alternative time options.</li>
-    </ol>
-    <p class="muted" style="margin-top:10px;font-size:0.86rem;">
-      If you need to move or cancel your appointment, try to give at
-      least a few hours’ notice so the slot can be re-opened.
-    </p>
-  </div>
-  <div>
-    <div class="card-soft" style="margin-bottom:14px;">
-      <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:6px;">
-        Studio details
-      </h3>
-      <p class="muted" style="font-size:0.86rem;line-height:1.6;">
-        <strong>Address</strong><br />
-        123 High Street<br />
-        Birmingham B1 1AA
-        <br /><br />
-        <strong>Hours</strong><br />
-        Tue – Sun: 10:00 – 20:00<br />
-        Closed Mondays
-      </p>
-    </div>
-    <div class="card-soft">
-      <p class="muted" style="font-size:0.86rem;line-height:1.6;">
-        <strong>Parking & transport:</strong> there is paid on-street
-        parking and multi-storey parking within a short walk. Multiple bus
-        routes and tram stops connect directly to the city centre — ideal
-        if you’re dropping by before or after work.
-      </p>
-    </div>
-  </div>
-</section>
+      <section class="fade-in two-col">
+        <div class="card-soft">
+          <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
+            Booking process
+          </h3>
+          <ol class="muted" style="font-size:0.86rem;line-height:1.8;padding-left:18px;">
+            <li>Send a WhatsApp message with your name.</li>
+            <li>Include preferred day, time and the service you’d like.</li>
+            <li>Optionally attach a photo of your current hair/beard.</li>
+            <li>Wait for confirmation and any alternative time options.</li>
+          </ol>
+          <p class="muted" style="margin-top:10px;font-size:0.86rem;">
+            If you need to move or cancel your appointment, try to give at
+            least a few hours’ notice so the slot can be re-opened.
+          </p>
+        </div>
+        <div>
+          <div class="card-soft" style="margin-bottom:14px;">
+            <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:6px;">
+              Studio details
+            </h3>
+            <p class="muted" style="font-size:0.86rem;line-height:1.6;">
+              <strong>Address</strong><br />
+              123 High Street<br />
+              Birmingham B1 1AA
+              <br /><br />
+              <strong>Hours</strong><br />
+              Tue – Sun: 10:00 – 20:00<br />
+              Closed Mondays
+            </p>
+          </div>
+          <div class="card-soft">
+            <p class="muted" style="font-size:0.86rem;line-height:1.6;">
+              <strong>Parking & transport:</strong> there is paid on-street
+              parking and multi-storey parking within a short walk. Multiple bus
+              routes and tram stops connect directly to the city centre — ideal
+              if you’re dropping by before or after work.
+            </p>
+          </div>
+        </div>
+      </section>
 
-<section class="fade-in">
-  <div class="section-header">
-    <h2 class="section-title">Map & directions</h2>
-    <p class="section-subtitle">
-      Use the map below to get directions from your current location.
-    </p>
-  </div>
-  <div style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.05);box-shadow:0 18px 40px rgba(0,0,0,0.5);">
-    <iframe
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps?q=123+High+Street,+Birmingham+B1+1AA&output=embed"
-      aria-label="JSN Barbers on Google Maps"
-      style="border:0;width:100%;height:320px;display:block;"
-    ></iframe>
-  </div>
-</section>
+      <section class="fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Map & directions</h2>
+          <p class="section-subtitle">
+            Use the map below to get directions from your current location.
+          </p>
+        </div>
+        <div style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.05);box-shadow:0 18px 40px rgba(0,0,0,0.5);">
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=123+High+Street,+Birmingham+B1+1AA&output=embed"
+            aria-label="JSN Barbers on Google Maps"
+            style="border:0;width:100%;height:320px;display:block;"
+          ></iframe>
+        </div>
+      </section>
 
-<section class="fade-in">
-  <div class="section-header">
-    <h2 class="section-title">Contact</h2>
-    <p class="section-subtitle">
-      WhatsApp is fastest. Instagram DMs are checked regularly too.
-    </p>
-  </div>
-  <div class="two-col">
-    <div class="card-soft">
-      <p class="muted" style="font-size:0.86rem;line-height:1.7;">
-        <strong>WhatsApp:</strong> +44 7501 919907<br />
-        <strong>Instagram:</strong>
-        <a href="https://www.instagram.com/jsn.barbers/" target="_blank" rel="noopener noreferrer"><u>@jsn.barbers</u></a>
-        <br /><br />
-        When messaging for the first time, let us know roughly how long
-        it’s been since your last cut and whether you’re keeping the same
-        style or changing it up.
-      </p>
-    </div>
-    <div class="card-soft">
-      <p class="muted" style="font-size:0.84rem;line-height:1.7;">
-        If you’re visiting straight from work or training, that’s fine —
-        there’s always a quick reset moment in the chair before the cut
-        starts. Just show up, sit back, and the rest is handled.
-      </p>
-    </div>
-  </div>
-</section>
+      <section class="fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Contact</h2>
+          <p class="section-subtitle">
+            WhatsApp is fastest. Instagram DMs are checked regularly too.
+          </p>
+        </div>
+        <div class="two-col">
+          <div class="card-soft">
+            <p class="muted" style="font-size:0.86rem;line-height:1.7;">
+              <strong>WhatsApp:</strong> +44 7501 919907<br />
+              <strong>Instagram:</strong>
+              <a href="https://www.instagram.com/jsn.barbers/" target="_blank" rel="noopener noreferrer"><u>@jsn.barbers</u></a>
+              <br /><br />
+              When messaging for the first time, let us know roughly how long
+              it’s been since your last cut and whether you’re keeping the same
+              style or changing it up.
+            </p>
+          </div>
+          <div class="card-soft">
+            <p class="muted" style="font-size:0.84rem;line-height:1.7;">
+              If you’re visiting straight from work or training, that’s fine —
+              there’s always a quick reset moment in the chair before the cut
+              starts. Just show up, sit back, and the rest is handled.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <footer>
         <span>© <span id="year"></span> JSN Barbers. All rights reserved.</span>
         <span>Designed for a minimalist, luxury barber experience in Birmingham.</span>
@@ -364,6 +523,25 @@
       { threshold: 0.2 }
     );
     document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMobileMenu = document.querySelector(".nav-mobile-menu");
+
+    if (navToggle && navMobileMenu) {
+      navToggle.addEventListener("click", () => {
+        navToggle.classList.toggle("open");
+        navMobileMenu.classList.toggle("open");
+      });
+
+      // Close menu when a link is tapped
+      navMobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navToggle.classList.remove("open");
+          navMobileMenu.classList.remove("open");
+        });
+      });
+    }
   </script>
 </body>
 </html>
