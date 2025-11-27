@@ -41,6 +41,8 @@
     a { color: inherit; text-decoration: none; }
     main { min-height: 100vh; }
     .page { max-width: var(--max-width); margin: 0 auto; padding: 20px 20px 80px; }
+
+    /* NAV */
     .nav {
       position: sticky; top: 0; z-index: 20;
       backdrop-filter: blur(18px);
@@ -67,6 +69,8 @@
       background: radial-gradient(circle at 20% 0, #26241a, #050608 60%);
       box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8);
     }
+
+    /* Desktop nav links */
     .nav-links { display: flex; align-items: center; gap: 16px; font-size: 0.86rem; }
     .nav-links a {
       color: var(--muted); padding: 6px 0; border-bottom: 1px solid transparent;
@@ -78,6 +82,7 @@
     .nav-links a.active {
       color: var(--fg); border-color: rgba(212, 175, 55, 0.5); opacity: 1;
     }
+
     .nav-cta {
       padding: 8px 16px; border-radius: 999px;
       border: 1px solid rgba(212, 175, 55, 0.65);
@@ -99,10 +104,59 @@
       border-color: rgba(212, 175, 55, 0.9);
       background: radial-gradient(circle at 0 0, #3a310b, transparent 60%), #050608;
     }
-    @media (max-width: 720px) {
-      .nav-inner { padding-inline: 16px; }
-      .nav-links { display: none; }
+
+    /* Hamburger button (mobile) */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
     }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: #f7f7f7;
+      transition: transform 200ms ease, opacity 200ms ease;
+    }
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(3.5px) rotate(45deg);
+    }
+    .nav-toggle.open span:nth-child(2) {
+      transform: translateY(-3.5px) rotate(-45deg);
+    }
+
+    /* Mobile dropdown nav */
+    .nav-mobile-menu {
+      display: none;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(5, 6, 8, 0.98);
+    }
+    .nav-mobile-menu a {
+      display: block;
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: center;
+      text-decoration: none;
+      transition: background 160ms ease, color 160ms ease;
+    }
+    .nav-mobile-menu a:hover,
+    .nav-mobile-menu a.active {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--fg);
+    }
+
+    /* Sections & common */
     section { margin-top: 36px; }
     .section-header {
       display: flex; justify-content: space-between; align-items: baseline;
@@ -127,6 +181,7 @@
       font-size: 0.76rem; color: var(--muted);
       display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
     }
+
     .hero {
       display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
       gap: 32px; padding: 40px 0 56px; align-items: center;
@@ -177,6 +232,7 @@
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; padding-top: 28px; }
     }
+
     .whatsapp-float {
       position: fixed; right: 18px; bottom: 18px; z-index: 40; display: none;
     }
@@ -188,7 +244,7 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #ffffff; font-size: 1.6rem; text-decoration: none;
     }
-    @media (max-width: 720px) { .whatsapp-float { display: block; } }
+
     .pill {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 4px 10px; border-radius: 999px;
@@ -197,8 +253,8 @@
       background: rgba(9, 9, 12, 0.9);
     }
     .pill-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+
     .two-col { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 26px; }
-    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
     .card-soft {
       border-radius: var(--radius-xl);
       border: 1px solid var(--border-subtle);
@@ -207,9 +263,92 @@
       box-shadow: var(--shadow-soft);
     }
     .muted { color: var(--muted); }
+
+    /* ========================= */
+    /* MOBILE LAYOUT TWEAKS      */
+    /* ========================= */
+
+    /* Tablets + phones */
+    @media (max-width: 768px) {
+      .page {
+        padding: 16px 16px 60px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .section-subtitle {
+        text-align: left;
+        max-width: 100%;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+
+    /* Smaller phones */
+    @media (max-width: 600px) {
+      .nav-inner {
+        padding-inline: 14px;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 0.8rem;
+        letter-spacing: 0.14em;
+      }
+
+      .nav-cta {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        letter-spacing: 0.09em;
+      }
+
+      .nav-cta span:last-child {
+        display: none; /* hide text, keep icon only */
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Mobile nav + WhatsApp bubble */
+    @media (max-width: 720px) {
+      .whatsapp-float {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-mobile-menu.open {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Mobile floating WhatsApp -->
   <div class="whatsapp-float">
     <a href="https://wa.me/447501919907?text=Hi%20JSN%20Barbers%2C%20I%27d%20like%20to%20book%20a%20cut."
        aria-label="Chat with JSN Barbers on WhatsApp"
@@ -219,18 +358,28 @@
     </a>
   </div>
 
+  <!-- NAVBAR -->
   <header class="nav">
     <div class="nav-inner">
       <a href="index.html" class="logo">
         <div class="logo-mark">J</div>
         <div>JSN BARBERS</div>
       </a>
+
+      <!-- Mobile hamburger button -->
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Desktop links -->
       <nav class="nav-links">
-        <a href="about.html" class="">About</a>
+        <a href="about.html">About</a>
         <a href="services.html" class="active">Services</a>
-        <a href="gallery.html" class="">Gallery</a>
-        <a href="visit.html" class="">Visit</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="visit.html">Visit</a>
       </nav>
+
       <a
         class="nav-cta"
         href="https://wa.me/447501919907?text=Hi%20JSN%20Barbers%2C%20I%27d%20like%20to%20book%20an%20appointment."
@@ -241,112 +390,121 @@
         <span>Book via WhatsApp</span>
       </a>
     </div>
+
+    <!-- Mobile dropdown menu -->
+    <nav class="nav-mobile-menu">
+      <a href="about.html">About</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="visit.html">Visit</a>
+    </nav>
   </header>
 
   <main>
     <div class="page">
-<section class="fade-in">
-  <div class="section-header">
-    <h1 class="section-title">Services & Pricing</h1>
-    <p class="section-subtitle">
-      A focused menu built around clean fades, beard work and classic
-      shaves. No hidden extras — finish and styling are included.
-    </p>
-  </div>
-  <div class="card-soft">
-    <p class="muted" style="font-size:0.86rem;line-height:1.7;margin-bottom:6px;">
-      Prices are transparent and the timing is realistic. If you’re not
-      sure what to book, DM on Instagram or send a quick WhatsApp message
-      with a photo of your current hair.
-    </p>
-  </div>
-</section>
+      <section class="fade-in">
+        <div class="section-header">
+          <h1 class="section-title">Services & Pricing</h1>
+          <p class="section-subtitle">
+            A focused menu built around clean fades, beard work and classic
+            shaves. No hidden extras — finish and styling are included.
+          </p>
+        </div>
+        <div class="card-soft">
+          <p class="muted" style="font-size:0.86rem;line-height:1.7;margin-bottom:6px;">
+            Prices are transparent and the timing is realistic. If you’re not
+            sure what to book, DM on Instagram or send a quick WhatsApp message
+            with a photo of your current hair.
+          </p>
+        </div>
+      </section>
 
-<section class="fade-in">
-  <div class="two-col">
-    <div>
-      <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
-        Hair services
-      </h3>
-      <ul class="muted" style="font-size:0.88rem;line-height:1.8;padding-left:18px;">
-        <li>
-          <strong>Signature Skin Fade – £25 (45 mins)</strong><br />
-          High, mid or low fade with clipper and scissor work on top,
-          texturised and finished with product.
-        </li>
-        <li style="margin-top:10px;">
-          <strong>Classic Taper & Scissor Cut – £24 (45 mins)</strong><br />
-          Softer, low-maintenance cut for work or study, with shape kept
-          clean around the neck and ears.
-        </li>
-        <li style="margin-top:10px;">
-          <strong>Restyle Cut – £30 (60 mins)</strong><br />
-          For when you’re changing your look completely — more time for
-          consultation, sectioning and styling.
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
-        Beard & shave
-      </h3>
-      <ul class="muted" style="font-size:0.88rem;line-height:1.8;padding-left:18px;">
-        <li>
-          <strong>Beard Shape-Up – £15 (25 mins)</strong><br />
-          Clipper and scissor work with razor on cheeks and neckline,
-          finished with oil or balm.
-        </li>
-        <li style="margin-top:10px;">
-          <strong>Fade & Beard Package – £32 (55 mins)</strong><br />
-          Full fade and beard refinement in one sitting for a complete,
-          sharpened look.
-        </li>
-        <li style="margin-top:10px;">
-          <strong>Clean Shave Ritual – £22 (40 mins)</strong><br />
-          Hot towel, prep, classic straight-razor shave and hydrating
-          finish for a proper reset.
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+      <section class="fade-in">
+        <div class="two-col">
+          <div>
+            <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
+              Hair services
+            </h3>
+            <ul class="muted" style="font-size:0.88rem;line-height:1.8;padding-left:18px;">
+              <li>
+                <strong>Signature Skin Fade – £25 (45 mins)</strong><br />
+                High, mid or low fade with clipper and scissor work on top,
+                texturised and finished with product.
+              </li>
+              <li style="margin-top:10px;">
+                <strong>Classic Taper & Scissor Cut – £24 (45 mins)</strong><br />
+                Softer, low-maintenance cut for work or study, with shape kept
+                clean around the neck and ears.
+              </li>
+              <li style="margin-top:10px;">
+                <strong>Restyle Cut – £30 (60 mins)</strong><br />
+                For when you’re changing your look completely — more time for
+                consultation, sectioning and styling.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
+              Beard & shave
+            </h3>
+            <ul class="muted" style="font-size:0.88rem;line-height:1.8;padding-left:18px;">
+              <li>
+                <strong>Beard Shape-Up – £15 (25 mins)</strong><br />
+                Clipper and scissor work with razor on cheeks and neckline,
+                finished with oil or balm.
+              </li>
+              <li style="margin-top:10px;">
+                <strong>Fade & Beard Package – £32 (55 mins)</strong><br />
+                Full fade and beard refinement in one sitting for a complete,
+                sharpened look.
+              </li>
+              <li style="margin-top:10px;">
+                <strong>Clean Shave Ritual – £22 (40 mins)</strong><br />
+                Hot towel, prep, classic straight-razor shave and hydrating
+                finish for a proper reset.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-<section class="fade-in">
-  <div class="two-col">
-    <div>
-      <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
-        Extras & offers
-      </h3>
-      <ul class="muted" style="font-size:0.86rem;line-height:1.8;padding-left:18px;">
-        <li>
-          <strong>Student Midweek Cut – £20</strong><br />
-          Available Tue–Thu before 16:00 with a valid student ID.
-        </li>
-        <li style="margin-top:8px;">
-          <strong>Line-up / Neck tidy – £10</strong><br />
-          Quick clean-up between full cuts to keep your shape sharp.
-        </li>
-        <li style="margin-top:8px;">
-          <strong>Skin fade refresh – £18</strong><br />
-          For regulars returning within 2 weeks of a full skin fade.
-        </li>
-      </ul>
-    </div>
-    <div class="card-soft">
-      <p class="muted" style="font-size:0.86rem;line-height:1.7;margin-bottom:10px;">
-        <strong>How to book:</strong> send a WhatsApp message with your
-        name, preferred day, time and the service you want. You’ll get a
-        confirmation and any alternative times if your slot’s already
-        taken.
-      </p>
-      <p class="muted" style="font-size:0.86rem;line-height:1.7;">
-        Please arrive on time — if you’re running late, just drop a quick
-        message. If the slot can be held, it will be; if not, we’ll
-        reschedule you to the next available opening.
-      </p>
-    </div>
-  </div>
-</section>
+      <section class="fade-in">
+        <div class="two-col">
+          <div>
+            <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
+              Extras & offers
+            </h3>
+            <ul class="muted" style="font-size:0.86rem;line-height:1.8;padding-left:18px;">
+              <li>
+                <strong>Student Midweek Cut – £20</strong><br />
+                Available Tue–Thu before 16:00 with a valid student ID.
+              </li>
+              <li style="margin-top:8px;">
+                <strong>Line-up / Neck tidy – £10</strong><br />
+                Quick clean-up between full cuts to keep your shape sharp.
+              </li>
+              <li style="margin-top:8px;">
+                <strong>Skin fade refresh – £18</strong><br />
+                For regulars returning within 2 weeks of a full skin fade.
+              </li>
+            </ul>
+          </div>
+          <div class="card-soft">
+            <p class="muted" style="font-size:0.86rem;line-height:1.7;margin-bottom:10px;">
+              <strong>How to book:</strong> send a WhatsApp message with your
+              name, preferred day, time and the service you want. You’ll get a
+              confirmation and any alternative times if your slot’s already
+              taken.
+            </p>
+            <p class="muted" style="font-size:0.86rem;line-height:1.7;">
+              Please arrive on time — if you’re running late, just drop a quick
+              message. If the slot can be held, it will be; if not, we’ll
+              reschedule you to the next available opening.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <footer>
         <span>© <span id="year"></span> JSN Barbers. All rights reserved.</span>
         <span>Designed for a minimalist, luxury barber experience in Birmingham.</span>
@@ -368,6 +526,25 @@
       { threshold: 0.2 }
     );
     document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMobileMenu = document.querySelector(".nav-mobile-menu");
+
+    if (navToggle && navMobileMenu) {
+      navToggle.addEventListener("click", () => {
+        navToggle.classList.toggle("open");
+        navMobileMenu.classList.toggle("open");
+      });
+
+      // Close menu when a link is tapped
+      navMobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navToggle.classList.remove("open");
+          navMobileMenu.classList.remove("open");
+        });
+      });
+    }
   </script>
 </body>
 </html>
