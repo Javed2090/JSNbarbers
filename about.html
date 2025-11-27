@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>About | JSN Barbers</title>
+  <title>JSN Barbers | Birmingham</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
@@ -41,6 +41,8 @@
     a { color: inherit; text-decoration: none; }
     main { min-height: 100vh; }
     .page { max-width: var(--max-width); margin: 0 auto; padding: 20px 20px 80px; }
+
+    /* NAV */
     .nav {
       position: sticky; top: 0; z-index: 20;
       backdrop-filter: blur(18px);
@@ -67,6 +69,8 @@
       background: radial-gradient(circle at 20% 0, #26241a, #050608 60%);
       box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8);
     }
+
+    /* Desktop nav links */
     .nav-links { display: flex; align-items: center; gap: 16px; font-size: 0.86rem; }
     .nav-links a {
       color: var(--muted); padding: 6px 0; border-bottom: 1px solid transparent;
@@ -78,6 +82,7 @@
     .nav-links a.active {
       color: var(--fg); border-color: rgba(212, 175, 55, 0.5); opacity: 1;
     }
+
     .nav-cta {
       padding: 8px 16px; border-radius: 999px;
       border: 1px solid rgba(212, 175, 55, 0.65);
@@ -99,34 +104,59 @@
       border-color: rgba(212, 175, 55, 0.9);
       background: radial-gradient(circle at 0 0, #3a310b, transparent 60%), #050608;
     }
-    @media (max-width: 720px) {
-      .nav-inner { padding-inline: 16px; }
-      .nav-links { display: none; }
+
+    /* Hamburger button (mobile) */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 5px;
     }
-    section { margin-top: 36px; }
-    .section-header {
-      display: flex; justify-content: space-between; align-items: baseline;
-      gap: 12px; margin-bottom: 18px;
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: #f7f7f7;
+      transition: transform 200ms ease, opacity 200ms ease;
     }
-    .section-title {
-      font-family: "Playfair Display", serif; font-size: 1.8rem;
-      letter-spacing: 0.06em; text-transform: uppercase;
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(3.5px) rotate(45deg);
     }
-    .section-subtitle {
-      font-size: 0.86rem; color: var(--muted);
-      max-width: 460px; text-align: right;
+    .nav-toggle.open span:nth-child(2) {
+      transform: translateY(-3.5px) rotate(-45deg);
     }
-    .fade-in {
-      opacity: 0; transform: translateY(14px);
-      transition: opacity 460ms ease, transform 460ms ease;
-    }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    footer {
+
+    /* Mobile dropdown nav */
+    .nav-mobile-menu {
+      display: none;
       border-top: 1px solid var(--border-subtle);
-      margin-top: 40px; padding-top: 16px;
-      font-size: 0.76rem; color: var(--muted);
-      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      background: rgba(5, 6, 8, 0.98);
     }
+    .nav-mobile-menu a {
+      display: block;
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: center;
+      text-decoration: none;
+      transition: background 160ms ease, color 160ms ease;
+    }
+    .nav-mobile-menu a:hover,
+    .nav-mobile-menu a.active {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--fg);
+    }
+
+    /* HERO */
     .hero {
       display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
       gap: 32px; padding: 40px 0 56px; align-items: center;
@@ -143,7 +173,7 @@
       line-height: 1.05; letter-spacing: 0.02em;
     }
     .hero-title span.accent { color: var(--accent); font-weight: 700; }
-    .hero-subtitle { font-size: 0.98rem; color: var(--muted); max-width: 460px; }
+    .hero-subtitle { font-size: 0.98rem; color: var(--muted); max-width: 480px; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
     .btn-primary {
       padding: 12px 22px; border-radius: 999px;
@@ -174,9 +204,263 @@
       border-color: rgba(255, 255, 255, 0.15);
       color: var(--fg); background: rgba(18, 18, 24, 0.96); transform: translateY(-1px);
     }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.8rem;
+      color: var(--muted); margin-top: 4px;
+    }
+    .hero-meta-item { display: flex; align-items: center; gap: 8px; }
+    .hero-meta-item span.label {
+      text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.72rem;
+      color: rgba(160, 160, 170, 0.9);
+    }
+    .hero-meta-dot {
+      width: 2px; height: 20px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+      border-radius: 999px;
+    }
+    .hero-image-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at 0 0, #1b1912, #050608 55%);
+      box-shadow: var(--shadow-soft); padding: 16px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .hero-image-main {
+      border-radius: 16px; overflow: hidden; position: relative;
+      aspect-ratio: 4 / 5;
+      background: radial-gradient(circle at 20% 0, #15161b, #050608 65%);
+    }
+    .hero-image-main img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(1.05) contrast(1.03); transform: scale(1.02);
+    }
+    .hero-stats {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; font-size: 0.78rem; color: var(--muted);
+    }
+    .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+    .hero-stat strong { font-size: 1rem; color: var(--fg); }
+    .hero-tagline {
+      font-size: 0.78rem; text-align: right;
+      color: rgba(212, 175, 55, 0.85);
+      text-transform: uppercase; letter-spacing: 0.22em;
+    }
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; padding-top: 28px; }
+      .hero-image-card { max-width: 420px; margin-inline: auto; }
+      .hero-title { font-size: clamp(2.2rem, 5vw, 2.8rem); }
     }
+
+    /* SECTIONS & COMMON */
+    section { margin-top: 36px; }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px; margin-bottom: 18px;
+    }
+    .section-title {
+      font-family: "Playfair Display", serif; font-size: 1.5rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .section-subtitle {
+      font-size: 0.86rem; color: var(--muted);
+      max-width: 420px; text-align: right;
+    }
+    .muted { color: var(--muted); }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.75rem; color: var(--muted);
+      background: rgba(9, 9, 12, 0.9);
+    }
+    .pill-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+
+    .two-col {
+      display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 26px;
+    }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+    .card-soft {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-subtle);
+      background: rgba(9,9,13,0.96);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* FEATURE GRID (About / Services / Gallery / Visit) */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    @media (max-width: 980px) {
+      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 540px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+    .feature-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: rgba(10, 10, 15, 0.96);
+      padding: 14px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.86rem;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition),
+        border-color var(--transition), background var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.55);
+      box-shadow: var(--shadow-soft);
+      background: rgba(14, 14, 20, 0.98);
+    }
+    .feature-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(160,160,170,0.98);
+    }
+    .feature-title {
+      font-size: 0.94rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .feature-link {
+      margin-top: auto;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(212, 175, 55, 0.92);
+    }
+
+    /* STUDIO PREVIEW */
+    .studio-list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .studio-list li {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+    .studio-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      margin-top: 7px;
+      background: rgba(212,175,55,0.9);
+    }
+
+    /* SERVICES PREVIEW */
+    .mini-services {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 880px) {
+      .mini-services { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 540px) {
+      .mini-services { grid-template-columns: 1fr; }
+    }
+    .mini-service-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 12px 12px;
+      background: rgba(8, 8, 13, 0.98);
+      font-size: 0.84rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mini-service-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+    .mini-service-price {
+      color: var(--accent);
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+    .mini-service-tag {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(160,160,170,0.9);
+      margin-top: 4px;
+    }
+
+    /* GALLERY STRIP */
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: 2.1fr 1.2fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    @media (max-width: 880px) {
+      .gallery-strip { grid-template-columns: 1fr; }
+    }
+    .gallery-images {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    @media (max-width: 540px) {
+      .gallery-images { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .gallery-thumb {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .gallery-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.02);
+    }
+
+    /* VISIT PREVIEW */
+    .visit-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+      font-size: 0.78rem;
+    }
+    .visit-pill {
+      border-radius: 999px;
+      padding: 5px 10px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(9,9,13,0.96);
+      color: var(--muted);
+    }
+
+    /* FOOTER & FADE */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 40px; padding-top: 16px;
+      font-size: 0.76rem; color: var(--muted);
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .fade-in {
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 460ms ease, transform 460ms ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Mobile WhatsApp float */
     .whatsapp-float {
       position: fixed; right: 18px; bottom: 18px; z-index: 40; display: none;
     }
@@ -188,28 +472,150 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #ffffff; font-size: 1.6rem; text-decoration: none;
     }
-    @media (max-width: 720px) { .whatsapp-float { display: block; } }
-    .pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 4px 10px; border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      font-size: 0.75rem; color: var(--muted);
-      background: rgba(9, 9, 12, 0.9);
+
+    /* ========================= */
+    /* MOBILE LAYOUT TWEAKS     */
+    /* ========================= */
+
+    /* Tablets + phones */
+    @media (max-width: 768px) {
+      .page {
+        padding: 16px 16px 60px;
+      }
+
+      /* Hero stack + centre */
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 24px 0 36px;
+        gap: 20px;
+      }
+
+      .hero-text {
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-subtitle {
+        max-width: 100%;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-meta {
+        justify-content: center;
+      }
+
+      /* Section headers align left so text doesn’t feel cramped */
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .section-subtitle {
+        text-align: left;
+        max-width: 100%;
+      }
+
+      /* Two-column sections (studio, visit etc.) become single column */
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
     }
-    .pill-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
-    .two-col { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 26px; }
-    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
-    .card-soft {
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border-subtle);
-      background: rgba(9,9,13,0.96);
-      padding: 20px 18px;
-      box-shadow: var(--shadow-soft);
+
+    /* Smaller phones */
+    @media (max-width: 600px) {
+      /* Nav more compact */
+      .nav-inner {
+        padding-inline: 14px;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 0.8rem;
+        letter-spacing: 0.14em;
+      }
+
+      .nav-cta {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        letter-spacing: 0.09em;
+      }
+
+      /* Hide CTA text – keep icon so it doesn’t overflow */
+      .nav-cta span:last-child {
+        display: none;
+      }
+
+      /* Feature tiles, services, gallery strip stack nicely */
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-services {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-strip {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .gallery-images {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .visit-badges {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      /* Buttons full-width for easier tapping */
+      .btn-primary,
+      .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
     }
-    .muted { color: var(--muted); }
+
+    /* Mobile-only nav + WhatsApp bubble */
+    @media (max-width: 720px) {
+      .whatsapp-float {
+        display: block;
+      }
+
+      /* Use hamburger + dropdown on mobile */
+      .nav-inner {
+        padding: 14px 16px;
+        gap: 12px;
+      }
+
+      .nav-links {
+        display: none; /* hide desktop links on mobile */
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-mobile-menu.open {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Mobile floating WhatsApp -->
   <div class="whatsapp-float">
     <a href="https://wa.me/447501919907?text=Hi%20JSN%20Barbers%2C%20I%27d%20like%20to%20book%20a%20cut."
        aria-label="Chat with JSN Barbers on WhatsApp"
@@ -219,18 +625,28 @@
     </a>
   </div>
 
+  <!-- NAVBAR -->
   <header class="nav">
     <div class="nav-inner">
       <a href="index.html" class="logo">
         <div class="logo-mark">J</div>
         <div>JSN BARBERS</div>
       </a>
+
+      <!-- Mobile hamburger button -->
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Desktop links -->
       <nav class="nav-links">
-        <a href="about.html" class="active">About</a>
-        <a href="services.html" class="">Services</a>
-        <a href="gallery.html" class="">Gallery</a>
-        <a href="visit.html" class="">Visit</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="visit.html">Visit</a>
       </nav>
+
       <a
         class="nav-cta"
         href="https://wa.me/447501919907?text=Hi%20JSN%20Barbers%2C%20I%27d%20like%20to%20book%20an%20appointment."
@@ -241,87 +657,317 @@
         <span>Book via WhatsApp</span>
       </a>
     </div>
+
+    <!-- Mobile dropdown menu -->
+    <nav class="nav-mobile-menu">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="visit.html">Visit</a>
+    </nav>
   </header>
 
   <main>
     <div class="page">
-<section class="fade-in">
-  <div class="section-header">
-    <h1 class="section-title">About JSN Barbers</h1>
-    <p class="section-subtitle">
-      A minimalist, appointment-led barber studio in Birmingham focused on
-      sharp work, calm energy and cuts that actually grow out well.
-    </p>
-  </div>
-  <div class="two-col">
-    <div>
-      <p class="muted" style="margin-bottom:12px;">
-        JSN Barbers was built for people who want more than a rushed
-        high-street cut but less noise than a busy barbershop. The chair
-        time is yours — no one hovering, no shouting over clippers.
-      </p>
-      <p class="muted" style="margin-bottom:12px;">
-        Every appointment starts with a quick check-in: how you usually
-        style your hair, what you do day to day, and how much upkeep you
-        actually want. From there, the cut is built around your lifestyle,
-        not just a reference photo.
-      </p>
-      <p class="muted">
-        The studio is deliberately simple: clean lines, warm lighting,
-        dark tones and just enough music to keep things moving. Attention
-        goes into the details you feel — sectioning, blend, neckline and
-        the way your hair sits the next morning.
-      </p>
-    </div>
-    <div class="card-soft">
-      <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:10px;">
-        What to expect
-      </h3>
-      <ul class="muted" style="font-size:0.86rem;line-height:1.7;padding-left:18px;">
-        <li>Appointment-led, minimal waiting around.</li>
-        <li>Consultation before the first cut or restyle.</li>
-        <li>Scissor work where it matters, not just clipper-only.</li>
-        <li>Finish with product that suits your hair & routine.</li>
-        <li>Honest advice on what will and won’t work for you.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+      <!-- HERO -->
+      <section class="hero fade-in">
+        <div class="hero-text">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            BIRMINGHAM • UNITED KINGDOM
+          </div>
+          <h1 class="hero-title">
+            Minimalist&nbsp;<span class="accent">Luxury</span><br />
+            Barber Studio.
+          </h1>
+          <p class="hero-subtitle">
+            JSN Barbers is a private chair experience in Birmingham city centre —
+            sharp fades, clean shaves and calm energy, set up for people who care
+            about the details.
+          </p>
 
-<section class="fade-in">
-  <div class="section-header">
-    <h2 class="section-title">The JSN approach</h2>
-    <p class="section-subtitle">
-      Simple menu, consistent results. No upsell, no overcomplication,
-      just clean work at a high standard.
-    </p>
-  </div>
-  <div class="two-col">
-    <div class="card-soft">
-      <p class="muted" style="font-size:0.88rem;line-height:1.7;">
-        Fades are blended to sit soft in natural light, not just in a
-        flash photo. Beard lines are kept clean but not over-carved, so
-        you don’t feel boxed in a few days later.
-        <br /><br />
-        If you’re growing your hair out or changing styles, we’ll plan a
-        couple of cuts ahead so every stage looks intentional — no random
-        in-between phase where nothing sits right.
-      </p>
-    </div>
-    <div>
-      <div class="pill" style="margin-bottom:10px;">
-        <span class="pill-dot"></span>
-        Designed around how your hair grows, not just how it looks on day one.
-      </div>
-      <p class="muted" style="font-size:0.86rem;line-height:1.7;">
-        You can bring reference photos, or just explain how you like your
-        hair to feel — tight, loose, textured, sharp. The aim is always
-        the same: a cut that feels like you and still looks good two or
-        three weeks later.
-      </p>
-    </div>
-  </div>
-</section>
+          <div class="hero-actions">
+            <a
+              class="btn-primary"
+              href="https://wa.me/447501919907?text=Hi%20JSN%20Barbers%2C%20I%27d%20like%20to%20book%20an%20appointment."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Book your seat</span>
+              <span>→</span>
+            </a>
+            <a
+              class="btn-secondary"
+              href="https://www.instagram.com/jsn.barbers/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>See the cuts on Instagram</span>
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span class="label">Hours</span>
+              <span>Tue – Sun · 10:00 – 20:00</span>
+            </div>
+            <div class="hero-meta-dot"></div>
+            <div class="hero-meta-item">
+              <span class="label">Location</span>
+              <span>Birmingham City Centre · B1</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-image-card fade-in">
+          <div class="hero-image-main">
+            <img
+              src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Modern barber chair in a minimalist studio"
+              loading="lazy"
+            />
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong>Skin fades, shaves, beards.</strong>
+              <span>Built around clean lines, soft blends and long-lasting shape.</span>
+            </div>
+            <div class="hero-tagline">STAY SHARP</div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- QUICK OVERVIEW TILES -->
+      <section class="fade-in">
+        <div class="section-header">
+          <h2 class="section-title">JSN at a glance</h2>
+          <p class="section-subtitle">
+            Four simple pillars: the studio, the cuts, the work, the visit. Tap through
+            to dive deeper.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <a href="about.html" class="feature-card">
+            <span class="feature-label">The Studio</span>
+            <div class="feature-title">Calm, appointment-led space.</div>
+            <p class="muted" style="font-size:0.84rem;">
+              Low lights, clean lines and a single chair focused on you — no chaos,
+              no waiting room noise.
+            </p>
+            <span class="feature-link">View studio →</span>
+          </a>
+          <a href="services.html" class="feature-card">
+            <span class="feature-label">Services</span>
+            <div class="feature-title">Focused, clear menu.</div>
+            <p class="muted" style="font-size:0.84rem;">
+              Skin fades, tapers, beard work and shaves — with realistic timings
+              and no hidden extras.
+            </p>
+            <span class="feature-link">View services →</span>
+          </a>
+          <a href="gallery.html" class="feature-card">
+            <span class="feature-label">Gallery</span>
+            <div class="feature-title">Cuts that hold shape.</div>
+            <p class="muted" style="font-size:0.84rem;">
+              A closer look at how the fades, beards and textures sit from every angle.
+            </p>
+            <span class="feature-link">View gallery →</span>
+          </a>
+          <a href="visit.html" class="feature-card">
+            <span class="feature-label">Visit & booking</span>
+            <div class="feature-title">WhatsApp first.</div>
+            <p class="muted" style="font-size:0.84rem;">
+              Central Birmingham, easy to get to, fully booked via a quick WhatsApp message.
+            </p>
+            <span class="feature-link">Plan your visit →</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- STUDIO PREVIEW -->
+      <section class="fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Inside the studio</h2>
+          <p class="section-subtitle">
+            Built for people who want a sharper cut and a quiet 45 minutes away
+            from the rest of the day.
+          </p>
+        </div>
+        <div class="two-col">
+          <div>
+            <p class="muted" style="font-size:0.9rem;line-height:1.7;margin-bottom:10px;">
+              JSN Barbers is intentionally stripped back — one chair, clean walls,
+              warm lighting and just enough music. It’s the kind of space you can
+              walk into straight from work or training and immediately switch off.
+            </p>
+            <ul class="studio-list">
+              <li>
+                <span class="studio-dot"></span>
+                <span>Appointment-led, so your time in the chair isn’t rushed for
+                  the next person.</span>
+              </li>
+              <li>
+                <span class="studio-dot"></span>
+                <span>Consultation on the first visit to lock in your shape,
+                  then consistent work every time after.</span>
+              </li>
+              <li>
+                <span class="studio-dot"></span>
+                <span>Fades and beards cut to look good in normal light —
+                  not just under a shop ring light.</span>
+              </li>
+            </ul>
+            <p class="muted" style="font-size:0.84rem;margin-top:10px;">
+              Want the full story? Learn more about the ethos and process on the
+              <a href="about.html"><u>About</u></a> page.
+            </p>
+          </div>
+          <div class="card-soft">
+            <h3 style="font-size:0.88rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:8px;">
+              First time at JSN?
+            </h3>
+            <p class="muted" style="font-size:0.86rem;line-height:1.6;">
+              Bring a couple of reference photos or just explain how you like your
+              hair to feel — tight, loose, textured or clean. From there we build a
+              cut around your day-to-day life, not just a one-off photo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES PREVIEW -->
+      <section class="fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Signature services</h2>
+          <p class="section-subtitle">
+            A simple menu that covers the essentials — with time built in for the
+            details that actually matter.
+          </p>
+        </div>
+        <div class="mini-services">
+          <div class="mini-service-card">
+            <div class="mini-service-header">
+              <span>Skin Fade</span>
+              <span class="mini-service-price">£25</span>
+            </div>
+            <p class="muted" style="font-size:0.82rem;">
+              High, mid or low fade with scissor work on top and a natural finish.
+            </p>
+            <div class="mini-service-tag">45 mins · Everyday sharp</div>
+          </div>
+          <div class="mini-service-card">
+            <div class="mini-service-header">
+              <span>Fade + Beard</span>
+              <span class="mini-service-price">£32</span>
+            </div>
+            <p class="muted" style="font-size:0.82rem;">
+              Full fade plus beard shaping, razor on cheeks and neckline.
+            </p>
+            <div class="mini-service-tag">55 mins · Complete reset</div>
+          </div>
+          <div class="mini-service-card">
+            <div class="mini-service-header">
+              <span>Clean Shave</span>
+              <span class="mini-service-price">£22</span>
+            </div>
+            <p class="muted" style="font-size:0.82rem;">
+              Hot towel, straight razor and a hydrating finish for a proper reset.
+            </p>
+            <div class="mini-service-tag">40 mins · Low-key luxury</div>
+          </div>
+        </div>
+        <p class="muted" style="font-size:0.84rem;margin-top:10px;">
+          Full price list, extras and student offers live on the
+          <a href="services.html"><u>Services</u></a> page.
+        </p>
+      </section>
+
+      <!-- GALLERY PREVIEW -->
+      <section class="fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Recent work</h2>
+          <p class="section-subtitle">
+            A small sample of fades, beards and textures. For more angles, motion
+            and before/afters, check the gallery and Instagram.
+          </p>
+        </div>
+        <div class="gallery-strip">
+          <div class="gallery-images">
+            <div class="gallery-thumb">
+              <img
+                src="https://images.pexels.com/photos/3998422/pexels-photo-3998422.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="High fade with textured top"
+                loading="lazy"
+              />
+            </div>
+            <div class="gallery-thumb">
+              <img
+                src="https://images.pexels.com/photos/3992879/pexels-photo-3992879.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Beard and line-up detailing"
+                loading="lazy"
+              />
+            </div>
+            <div class="gallery-thumb">
+              <img
+                src="https://images.pexels.com/photos/3998429/pexels-photo-3998429.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Side profile skin fade"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div class="card-soft">
+            <p class="muted" style="font-size:0.86rem;line-height:1.7;margin-bottom:10px;">
+              Cuts are designed to sit clean on day one and still look intentional
+              two or three weeks later. Blends are done in natural-looking gradients
+              so they don’t feel too harsh once you’re out of the chair.
+            </p>
+            <p class="muted" style="font-size:0.86rem;line-height:1.7;">
+              For more cuts, close-ups and reel angles, head to the full
+              <a href="gallery.html"><u>Gallery</u></a> page or tap through to
+              Instagram:
+              <a href="https://www.instagram.com/jsn.barbers/" target="_blank" rel="noopener noreferrer"><u>@jsn.barbers</u></a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISIT / BOOKING PREVIEW -->
+      <section class="fade-in">
+        <div class="section-header">
+          <h2 class="section-title">Visit & booking</h2>
+          <p class="section-subtitle">
+            WhatsApp is the quickest way to lock in your slot. Central location,
+            easy to reach from anywhere in Birmingham.
+          </p>
+        </div>
+        <div class="two-col">
+          <div class="card-soft">
+            <h3 style="font-size:0.9rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:8px;">
+              How to book
+            </h3>
+            <ol class="muted" style="font-size:0.86rem;line-height:1.8;padding-left:18px;">
+              <li>Send a WhatsApp to <strong>+44 7501 919907</strong>.</li>
+              <li>Include your name, preferred day & time and the service.</li>
+              <li>Optionally attach a photo of your current hair/beard.</li>
+              <li>Wait for confirmation or alternative time options.</li>
+            </ol>
+            <div class="visit-badges">
+              <div class="visit-pill">Card & contactless accepted</div>
+              <div class="visit-pill">Central Birmingham · B1 1AA</div>
+              <div class="visit-pill">Near tram & bus routes</div>
+            </div>
+          </div>
+          <div class="card-soft">
+            <p class="muted" style="font-size:0.86rem;line-height:1.7;">
+              Full address, map embed, parking tips and travel detail live on the
+              <a href="visit.html"><u>Visit</u></a> page. Use the map there to get
+              walking or driving directions straight from your phone.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
       <footer>
         <span>© <span id="year"></span> JSN Barbers. All rights reserved.</span>
         <span>Designed for a minimalist, luxury barber experience in Birmingham.</span>
@@ -343,6 +989,25 @@
       { threshold: 0.2 }
     );
     document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMobileMenu = document.querySelector(".nav-mobile-menu");
+
+    if (navToggle && navMobileMenu) {
+      navToggle.addEventListener("click", () => {
+        navToggle.classList.toggle("open");
+        navMobileMenu.classList.toggle("open");
+      });
+
+      // Close menu when a link is tapped
+      navMobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navToggle.classList.remove("open");
+          navMobileMenu.classList.remove("open");
+        });
+      });
+    }
   </script>
 </body>
 </html>
