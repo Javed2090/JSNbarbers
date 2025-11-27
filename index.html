@@ -102,6 +102,56 @@
       background: radial-gradient(circle at 0 0, #3a310b, transparent 60%), #050608;
     }
     @media (max-width: 720px) {
+      /* ============================= */
+/*   MOBILE NAV IMPROVEMENTS     */
+/* ============================= */
+
+@media (max-width: 720px) {
+
+  /* Make mobile dropdown links equally spaced */
+  .nav-mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: rgba(5, 6, 8, 0.98);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .nav-mobile-menu.open {
+    display: flex;
+  }
+
+  .nav-mobile-menu a {
+    padding: 14px 0;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border-subtle);
+    width: 100%;
+    transition: background 160ms ease, color 160ms ease;
+  }
+
+  /* Highlight on tap + active page */
+  .nav-mobile-menu a:active,
+  .nav-mobile-menu a.active,
+  .nav-mobile-menu a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--fg);
+  }
+
+  /* Better spacing on the top bar for mobile */
+  .nav-inner {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  /* Make hamburger + logo + CTA spaced evenly */
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
       .nav-inner { padding-inline: 16px; }
       .nav-links { display: none; }
     }
